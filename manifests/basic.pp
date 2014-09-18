@@ -39,9 +39,18 @@ class common::basic {
         require => File["create-swap-directory"]
     }
 
+    # Change permissions for apache folder
+    file { "/var/www":
+        ensure => directory,
+        owner  => 'www-data',
+        group  => 'www-data',
+        mode   =>  775
+    }
+
     # Create an user for admin system
     user { "admin":
         managehome => true,
+        shell      => '/bin/bash',
         ensure     => present,
         gid        => 110,
         groups     => ["www-data", "admin"],
