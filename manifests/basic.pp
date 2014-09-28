@@ -3,26 +3,14 @@
 
 class common::basic {
 
-     exec { "apt-update":
+     exec { "apt-update-common":
         command => "/usr/bin/apt-get update"
-    }
-
-    # Create shell for variables and scripts for initializer
-    file { "/etc/profile.d/common.sh":
-       mode    => 755,
-       content => template("common/alias")
     }
 
     # Install util packages
     package { ["git-core", "curl", "vim", "libcurl4-openssl-dev"]:
         ensure  => installed,
-        require => Exec["apt-update"]
-    }
-
-    # Install apache server and depences
-    package { ["apache2", "apache2-threaded-dev", "libapr1-dev", "libaprutil1-dev"]:
-        ensure  => installed,
-        require => Exec["apt-update"]
+        require => Exec["apt-update-common"]
     }
 
     # Create a directory for swap memory
@@ -39,22 +27,13 @@ class common::basic {
         require => File["create-swap-directory"]
     }
 
-    # Change permissions for apache folder
-    file { "/var/www":
-        ensure => directory,
-        owner  => 'www-data',
-        group  => 'www-data',
-        mode   =>  775
-    }
-
     # Create an user for admin system
     user { "admin":
         managehome => true,
         shell      => '/bin/bash',
         ensure     => present,
         gid        => 110,
-        groups     => ["www-data", "admin"],
-        require    => Package["apache2"]
+        groups     => ["admin"]
     }
 
 }
