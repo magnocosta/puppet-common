@@ -4,9 +4,8 @@ Um simples módulo Puppet para a instalação e configuração de alguns pacotes
 
 ####O que ele faz?
   Instala todos os pacotes abaixo:
-  * Instala os pacotes git-core, curl, vim, libcurl4-openssl-dev, apache2, apache2-threaded-dev, libapr1-dev, libaprutil1-dev;
+  * Instala os pacotes git-core, curl, vim, libcurl4-openssl-dev;
   * Reserva um espaço para swap no tamanho de 1GB;
-  * Adiciona uma pasta /var/www com as devidas permissões para o serviço Apache;
   * Adiciona um usuário chamado "admin" para gerenciamto do sistema;
   
 ####Como Utilizar
@@ -21,7 +20,7 @@ Um simples módulo Puppet para a instalação e configuração de alguns pacotes
   
   No diretório root do projeto Vagrant, utilize o comando abaixo para baixar e adicionar o módulo a sua pasta de módulos.
     
-    git clone --recursive https://github.com/magnocosta/puppet-common.git modules/common
+    git clone https://github.com/magnocosta/puppet-common.git modules/common
     
   Adicione a linha abaixo no seu Vagrantfile, para dizer ao Puppet que a pasta modules possui módulos de extensão para seu projetos.
     
