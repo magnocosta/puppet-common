@@ -8,7 +8,7 @@ class common::basic {
     }
 
     # Install util packages
-    package { ["git-core", "curl", "vim", "libcurl4-openssl-dev"]:
+    package { ["git-core", "curl", "vim", "libcurl4-openssl-dev", "python-software-properties"]:
         ensure  => installed,
         require => Exec["apt-update-common"]
     }
